@@ -1,0 +1,91 @@
+<h1>EDUKACIJSKI</h1>
+
+<mat-form-field>
+  <mat-label>Pretraživanje</mat-label>
+  <input matInput (keyup)="applyFilter($event)" #input>
+</mat-form-field>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let employee"> {{employee.employeeId}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="form">
+    <th mat-header-cell *matHeaderCellDef> Forma </th>
+    <td mat-cell *matCellDef="let element">
+      <button (click)="openDialog2(element)" mat-icon-button color="primary" aria-label="approve button">
+        <mat-icon>info</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Ime i prezime </th>
+    <td mat-cell *matCellDef="let employee"> {{employee.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="average1">
+    <th mat-header-cell *matHeaderCellDef> {{month[month1]}} </th>
+    <td mat-cell *matCellDef="let employee">
+      @if(employee.average1<=80){ <span style="background-color: rgb(240, 13, 13);">{{employee.average1}} </span>
+        }@else if(employee.average1>120) {
+        <span style="background-color: rgb(238, 255, 5);">{{employee.average1}} </span>
+        }@else {
+        <span style="background-color: rgb(29, 122, 44);">{{employee.average1}} </span>
+        }
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="average2">
+    <th mat-header-cell *matHeaderCellDef> {{month[month2]}} </th>
+    <td mat-cell *matCellDef="let employee">
+      @if(employee.average2<=80){ <span style="background-color: rgb(240, 13, 13);">{{employee.average2}} </span>
+        }@else if(employee.average1>120) {
+        <span style="background-color: rgb(238, 255, 5);">{{employee.average2}} </span>
+        }@else {
+        <span style="background-color: rgb(29, 122, 44);">{{employee.average2}} </span>
+        }
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="average3">
+    <th mat-header-cell *matHeaderCellDef> {{month[month3]}} </th>
+    <td mat-cell *matCellDef="let employee">
+      @if(employee.average3<=80){ <span style="background-color: rgb(240, 13, 13);">{{employee.average3}} </span>
+        }@else if(employee.average1>120) {
+        <span style="background-color: rgb(238, 255, 5);">{{employee.average3}} </span>
+        }@else {
+        <span style="background-color: rgb(29, 122, 44);">{{employee.average3}} </span>
+        }
+  </ng-container>
+
+  <ng-container matColumnDef="info">
+    <th mat-header-cell *matHeaderCellDef> Info </th>
+    <td mat-cell *matCellDef="let element">
+      <button (click)="openDialog(element)" mat-icon-button color="primary" aria-label="approve button">
+        <mat-icon>info</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="fired">
+    <th mat-header-cell *matHeaderCellDef> Arhiviraj </th>
+    <td mat-cell *matCellDef="let element">
+      <button (click)="fired(element)" mat-icon-button color="primary" aria-label="fired button">
+        <mat-icon>person_remove</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

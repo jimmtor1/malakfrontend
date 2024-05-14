@@ -1,0 +1,22 @@
+<h1>KREIRANJE KUPCA</h1>
+
+<form class="form">
+    <mat-form-field class="full-width">
+        <mat-label>Ime i prezime kupca</mat-label>
+        <input matInput placeholder="Ime i prezime kupca" name="name" [(ngModel)]="customer.name">
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+        <mat-label>Kreirajte šifru</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" name="password" [(ngModel)]="customer.password">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+    </mat-form-field>
+
+    <button (click)="saveCustom()" mat-raised-button color="primary">
+        Spremi
+    </button>
+
+</form>

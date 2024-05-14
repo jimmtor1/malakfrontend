@@ -1,0 +1,40 @@
+<div style="height: 100%; background-color: #303030; margin: 0; padding-top: 5em;">
+    <mat-card>
+        <mat-card-content>
+
+            <form class="example-form">
+
+                <h1 style="color:white">Malak Janj</h1>
+                @if(error){
+                <mat-error>Pogrešni podaci</mat-error>
+                }                  
+
+                <mat-form-field>
+                    <mat-label>Izaberite ulogu</mat-label>
+                    <mat-select name="role" [(ngModel)]="loginDTO.role">
+                      <mat-option value="employee">Radnik</mat-option>
+                      <mat-option value="customer">Kupac</mat-option>
+                      <mat-option value="admin">Administrator</mat-option>
+                      <mat-option value="boss">Šef</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Korisničko ime</mat-label>
+                    <input name="user" matInput placeholder="Unesite korisničko ime"  [(ngModel)]="loginDTO.user">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Šifra</mat-label>
+                    <input name="pass" type="password" matInput placeholder="Šifra" [(ngModel)]="loginDTO.pass">
+                </mat-form-field>
+
+                <button mat-raised-button color="primary" (click)="login()">Prijava</button>
+
+
+            </form>
+
+
+        </mat-card-content>
+    </mat-card>
+</div>

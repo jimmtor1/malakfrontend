@@ -1,0 +1,88 @@
+<mat-sidenav-container>
+
+    <mat-sidenav mode="side" opened>
+
+        <mat-toolbar>Izbornik</mat-toolbar>
+
+        <mat-nav-list>
+            @if(this.role=="admin" || this.role=="boss"){
+            <mat-list-item routerLink="customerform">
+                <mat-icon>person_2</mat-icon>
+                Kreiranje kupca
+            </mat-list-item>
+
+            <mat-list-item routerLink="employeeform">
+                <mat-icon>badge</mat-icon>
+                Kreiranje radnika
+            </mat-list-item>
+            }
+            @if(this.role!="employee"){
+            <mat-list-item routerLink="orderlist">
+                <mat-icon>task</mat-icon>
+                Narudžbe
+            </mat-list-item>
+            }
+            @if(this.role!="customer"){
+            <mat-list-item routerLink="production">
+                <mat-icon>conveyor_belt</mat-icon>
+                Proizvodnja
+            </mat-list-item>
+            }
+            @if(this.role=="admin" || this.role=="boss"){
+            <mat-list-item routerLink="jobperformance">
+                <mat-icon>plumbing</mat-icon>
+                Edukacijski
+            </mat-list-item>
+
+            <mat-list-item routerLink="workhistory">
+                <mat-icon>work_history</mat-icon>
+                Rezultati po danu
+            </mat-list-item>
+
+            <mat-list-item routerLink="production2">
+                <mat-icon>conveyor_belt</mat-icon>
+                Klijenti
+            </mat-list-item>
+
+            <mat-list-item routerLink="firedemployee">
+                <mat-icon>person_remove</mat-icon>
+                Arhivirani radnici
+            </mat-list-item>
+
+            }
+            @if(this.role=="customer"){
+            <mat-list-item routerLink="profile">
+                <mat-icon>person</mat-icon>
+                Profil
+            </mat-list-item>
+            }
+            @if(this.role=="employee"){
+            <mat-list-item routerLink="employeeprofile">
+                <mat-icon>person</mat-icon>
+                Profil
+            </mat-list-item>
+            <mat-list-item routerLink="workbookemployee">
+                <mat-icon>person</mat-icon>
+                Radna sveska
+            </mat-list-item>
+
+            }
+            <mat-list-item (click)="logout()">
+                <mat-icon>logout</mat-icon>
+                Odjava
+            </mat-list-item>
+
+        </mat-nav-list>
+
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <mat-toolbar>
+            <span>Malak Janj</span>
+        </mat-toolbar>
+        <div style="padding: 14px;">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+
+</mat-sidenav-container>

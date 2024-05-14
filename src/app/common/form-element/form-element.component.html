@@ -1,0 +1,60 @@
+<h1 mat-dialog-title>IZMJENA</h1>
+
+
+<mat-dialog-content style="min-width: 600px; min-height: 250px;">
+
+    <mat-grid-list gutterSize="10px" cols="2" rowHeight="80px">
+
+        <mat-grid-tile colspan="1" rowspan="1">
+            <mat-form-field class="full-width">
+                <mat-label>Element</mat-label>
+                <input matInput placeholder="Name" name="name" [(ngModel)]="element.name">
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1" rowspan="1">
+            <mat-form-field class="full-width">
+                <mat-label>Materijal</mat-label>
+                <input matInput placeholder="Material" name="material" [(ngModel)]="element.material">
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1" rowspan="1">
+            <mat-form-field class="full-width">
+                <mat-label>Dužina</mat-label>
+                <input matInput placeholder="Length" name="length" [(ngModel)]="element.length">
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1" rowspan="1">
+            <mat-form-field class="full-width">
+                <mat-label>Visina</mat-label>
+                <input matInput placeholder="Height" name="height" [(ngModel)]="element.height">
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1" rowspan="1">
+            <mat-form-field class="full-width">
+                <mat-label>Širina</mat-label>
+                <input matInput placeholder="Width" name="width" [(ngModel)]="element.width">
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1" rowspan="1">
+            <mat-form-field class="full-width">
+                <mat-label>Količina</mat-label>
+                <input matInput placeholder="Quantity" name="quantity" [(ngModel)]="element.quantity">
+            </mat-form-field>
+        </mat-grid-tile>
+
+    </mat-grid-list>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button (click)="save()" mat-raised-button color="primary" aria-label="Save">
+        <mat-icon>save</mat-icon>
+        Spremi
+    </button>
+    <button mat-button mat-dialog-close>Zatvori</button>
+</mat-dialog-actions>

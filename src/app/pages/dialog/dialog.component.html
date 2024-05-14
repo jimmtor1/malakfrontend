@@ -1,0 +1,58 @@
+<h2 mat-dialog-title>NARUDŽBA BROJ {{data}}</h2>
+<mat-dialog-content>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="margin-top: 20px;">
+
+        <ng-container matColumnDef="Num">
+            <th mat-header-cell *matHeaderCellDef> R.Br </th>
+            <td mat-cell *matCellDef="let i=index"> {{i+1}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Element </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="material">
+            <th mat-header-cell *matHeaderCellDef> Materijal </th>
+            <td mat-cell *matCellDef="let element"> {{element.material}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="length">
+            <th mat-header-cell *matHeaderCellDef> Dužina </th>
+            <td mat-cell *matCellDef="let element"> {{element.length}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="height">
+            <th mat-header-cell *matHeaderCellDef> Visina </th>
+            <td mat-cell *matCellDef="let element"> {{element.height}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="width">
+            <th mat-header-cell *matHeaderCellDef> Širina </th>
+            <td mat-cell *matCellDef="let element"> {{element.width}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="quantity">
+            <th mat-header-cell *matHeaderCellDef> Količina </th>
+            <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="assigned">
+            <th mat-header-cell *matHeaderCellDef> Dodeljeno </th>
+            <td mat-cell *matCellDef="let element"> {{element.assigned}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    @if(nodata){
+    <p>Ova narudžba nema niti jednog elementa.</p>
+    }
+
+
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>Zatvori</button>
+</mat-dialog-actions>

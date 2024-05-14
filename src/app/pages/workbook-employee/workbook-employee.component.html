@@ -1,0 +1,202 @@
+<h2 mat-dialog-title>
+    DODAVANJE PODATAKA
+</h2>
+
+<!-- <mat-tab-group (selectedTabChange)="changeStateSaveButton()"> -->
+<!-- <mat-tab label="Form"> -->
+<mat-grid-list gutterSize="10px" cols="7" rowHeight="62px">
+
+    <mat-grid-tile colspan="1" rowspan="1">
+        <mat-form-field class="full-width">
+            <mat-label>I/P</mat-label>
+            <mat-select name="I/P" [(ngModel)]="orderAssignment.io">
+                <mat-option value="I">I</mat-option>
+                <mat-option value="P">P</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="1" rowspan="1">
+
+        <!-- <form class="example-form"> -->
+        <mat-form-field class="full-width">
+            <mat-label>Nalog</mat-label>
+            <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl"
+                [matAutocomplete]="auto" (blur)="chargeElements()" name="order">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                @for (order of filteredOrders | async; track order.id) {
+                <mat-option [value]="order.id" (onSelectionChange)="chargeElements(order.id)"
+                    (click)="chargeElements(order.id)">{{order.id}}</mat-option>
+                }
+            </mat-autocomplete>
+        </mat-form-field>
+        <!-- </form> -->
+
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="1" rowspan="1">
+
+        <mat-form-field class="full-width">
+            <mat-label>Element</mat-label>
+            <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl2"
+                [matAutocomplete]="auto2" name="element">
+            <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFn">
+                @for (element of filteredElements | async; track element.id) {
+                <mat-option [value]="element">{{element.name}}</mat-option>
+                }
+            </mat-autocomplete>
+        </mat-form-field>
+
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="1" rowspan="1">
+        <mat-form-field class="full-width">
+            <mat-label>Vrsta obrade</mat-label>
+            <input type="text" matInput placeholder="ProcessingType" name="ProcessingType"
+                [(ngModel)]="orderAssignment.processingType">
+        </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="1" rowspan="1">
+        <mat-form-field class="full-width">
+            <mat-label>Količina</mat-label>
+            <input #inputElement type="number" min="1" matInput placeholder="Quantity" name="quantity"
+                [(ngModel)]="orderAssignment.quantity">
+        </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="1" rowspan="1">
+        <mat-form-field class="full-width">
+            <mat-label>Vrijeme od</mat-label>
+            <input type="time" matInput placeholder="starttime" name="starttime"
+                [(ngModel)]="orderAssignment.startTime">
+        </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="1" rowspan="1">
+        <mat-form-field class="full-width">
+            <mat-label>Vrijeme do</mat-label>
+            <input type="time" matInput placeholder="endtime" name="endtime" [(ngModel)]="orderAssignment.endTime">
+        </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="1" rowspan="1">
+        <mat-form-field class="full-width">
+            <mat-label>Broj mašine</mat-label>
+            <input type="number" min="1" matInput placeholder="machine" name="machine"
+                [(ngModel)]="orderAssignment.machine">
+        </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="1" rowspan="1">
+        <mat-form-field class="full-width">
+            <mat-label>V/B</mat-label>
+            <mat-select name="manager" [(ngModel)]="orderAssignment.manager">
+                <mat-option value="V">V</mat-option>
+                <mat-option value="B">B</mat-option>               
+            </mat-select>
+        </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="1" rowspan="1">
+        <mat-form-field class="full-width">
+            <mat-label>Pomoćnik</mat-label>
+            <mat-select name="assistant" [(ngModel)]="orderAssignment.assistant">
+                @for (assistant of employees; track assistant.id) {
+                <mat-option [value]="assistant.id">{{assistant.name}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+    </mat-grid-tile>
+
+    <!-- <mat-grid-tile colspan="3" rowspan="1">
+        <button (click)="add()" mat-raised-button color="primary" aria-label="Save">
+            <mat-icon>save</mat-icon>
+            Add
+        </button>
+    </mat-grid-tile> -->
+
+
+</mat-grid-list>
+
+<div style="margin-bottom: 10px; display: flex; justify-content: center;">
+    <button (click)="add()" mat-raised-button extended color="primary" style="width: 80%;"
+        aria-label="add new element to the list">
+        <mat-icon>add</mat-icon>
+        Dodaj
+    </button>
+</div>
+
+
+<!-- Start table -->
+
+<table mat-table [dataSource]="dataSourceform" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="I/P">
+        <th mat-header-cell *matHeaderCellDef> I/P </th>
+        <td mat-cell *matCellDef="let orderAssignment"> {{orderAssignment.io}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="order">
+        <th mat-header-cell *matHeaderCellDef> Nalog </th>
+        <td mat-cell *matCellDef="let orderAssignment"> {{orderAssignment.order.id}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="element">
+        <th mat-header-cell *matHeaderCellDef> Element </th>
+        <td mat-cell *matCellDef="let orderAssignment"> {{orderAssignment.elementId}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef> Količina </th>
+        <td mat-cell *matCellDef="let orderAssignment"> {{orderAssignment.quantity}} </td>
+    </ng-container>
+    <ng-container matColumnDef="startime">
+        <th mat-header-cell *matHeaderCellDef> Vrijeme od </th>
+        <td mat-cell *matCellDef="let orderAssignment"> {{orderAssignment.startTime}} </td>
+    </ng-container>
+    <ng-container matColumnDef="endtime">
+        <th mat-header-cell *matHeaderCellDef> Vrijeme do </th>
+        <td mat-cell *matCellDef="let orderAssignment"> {{orderAssignment.endTime}} </td>
+    </ng-container>
+    <ng-container matColumnDef="machine">
+        <th mat-header-cell *matHeaderCellDef> Mašina </th>
+        <td mat-cell *matCellDef="let orderAssignment"> {{orderAssignment.machine}} </td>
+    </ng-container>
+    <ng-container matColumnDef="manager">
+        <th mat-header-cell *matHeaderCellDef> V/B </th>
+        <td mat-cell *matCellDef="let orderAssignment"> {{orderAssignment.manager}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="assistant">
+        <th mat-header-cell *matHeaderCellDef> Pomoćnik </th>
+        <td mat-cell *matCellDef="let orderAssignment"> {{getNameForId(orderAssignment.assistant)}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="score">
+        <th mat-header-cell *matHeaderCellDef> Ocjena </th>
+        <td mat-cell *matCellDef="let orderAssignment"> {{orderAssignment.score}} </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<!-- </mat-tab> -->
+
+
+
+
+
+<!-- <mat-dialog-actions> -->
+
+<!-- @if(this.showSaveButton){ -->
+<button (click)="save()" mat-raised-button color="primary" aria-label="Save">
+    <mat-icon>save</mat-icon>
+    Spremi
+</button>
+<!-- } -->
+
+<!-- <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions> -->

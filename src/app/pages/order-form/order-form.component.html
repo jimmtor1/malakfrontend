@@ -1,0 +1,41 @@
+<h1>NARUDŽBA</h1>
+
+<!-- <form class="form"> -->
+
+    <mat-grid-list gutterSize="15px" cols="3" rowHeight="80px">
+
+        <mat-grid-tile colspan="1" rowspan="1">
+            <mat-form-field class="full-width">
+                <mat-label>Oznaka narudžbe</mat-label>
+                <mat-select name="suffix" [(ngModel)]="order.suffix" required>
+                    <mat-option value="A">A</mat-option>
+                    <mat-option value="T">T</mat-option>
+                    <mat-option value="K">K</mat-option>
+                    <mat-option value="L">L</mat-option>
+                    <mat-option value="S">S</mat-option>
+                    <mat-option value="M">M</mat-option>
+                    <mat-option value="G">G</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="2" rowspan="1">
+            <mat-form-field class="full-width">
+                <mat-label>Kupac</mat-label>
+                <mat-select name="customerId" [(ngModel)]="order.customer!.id" required>
+                    @for(customer of customers; track customer.id){
+                    <mat-option value="{{customer.id}}">{{customer.name}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </mat-grid-tile>
+
+    </mat-grid-list>
+
+    <button (click)="saveOrder()" mat-raised-button color="primary">
+        Spremi
+    </button>
+
+<!-- </form> -->
+<hr>
+
